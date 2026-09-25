@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>加密同步任务看板</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- 解锁界面 -->
+  <div id="unlock-view" class="unlock-view">
+    <form id="unlock-form" class="unlock-card">
+      <h1>🔐 加密任务看板</h1>
+      <h2 id="unlock-title">输入主密码解锁</h2>
+      <p id="unlock-hint" class="hint"></p>
+      <input id="password" type="password" placeholder="主密码" autocomplete="current-password" required>
+      <p id="unlock-error" class="error"></p>
+      <button id="unlock-btn" type="submit">解锁</button>
+      <p class="hint small">密钥在主密码基础上经 PBKDF2 派生，仅存在于内存；所有任务以 AES-256-GCM 加密后存入 IndexedDB。</p>
+    </form>
+  </div>
+
+  <!-- 看板界面 -->
+  <div id="board-view" hidden>
+    <header class="topbar">
+      <h1>📋 任务看板</h1>
+      <div class="status">
+        <span id="offline-badge" class="badge" hidden>离线</span>
+        <span id="net-status">在线</span>
+        <label class="offline-switch">
+          <input type="checkbox" id="offline-toggle"> 模拟离线
+        </label>
+      </div>
+    </header>
+    <p id="key-warning" class="key-warning" hidden></p>
+    <main id="board" class="board"></main>
+    <footer class="footer">
+      多开几个标签页试试：所有编辑实时同步；拖拽排序、双击编辑标题、⏰ 设置截止时间、× 删除。
+    </footer>
+  </div>
+
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>

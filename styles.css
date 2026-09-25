@@ -1,0 +1,106 @@
+* { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --bg: #0f1420;
+  --panel: #1a2233;
+  --panel-2: #222c42;
+  --text: #e8ecf4;
+  --muted: #8b96ab;
+  --accent: #4f8cff;
+  --danger: #ff5f6b;
+  --warn: #ffb454;
+}
+body {
+  font-family: system-ui, -apple-system, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+}
+
+/* ---- 解锁 ---- */
+.unlock-view { display: flex; align-items: center; justify-content: center; min-height: 100vh; }
+.unlock-card {
+  background: var(--panel); padding: 32px; border-radius: 14px; width: 380px;
+  display: flex; flex-direction: column; gap: 14px; box-shadow: 0 12px 40px rgba(0,0,0,.4);
+}
+.unlock-card h1 { font-size: 22px; }
+.unlock-card h2 { font-size: 15px; color: var(--muted); font-weight: 500; }
+.unlock-card input {
+  padding: 12px; border-radius: 8px; border: 1px solid #334; background: var(--panel-2);
+  color: var(--text); font-size: 15px;
+}
+.unlock-card button {
+  padding: 12px; border: 0; border-radius: 8px; background: var(--accent);
+  color: #fff; font-size: 15px; cursor: pointer;
+}
+.unlock-card button:disabled { opacity: .6; cursor: wait; }
+.hint { color: var(--muted); font-size: 13px; }
+.hint.small { font-size: 12px; opacity: .8; }
+.error { color: var(--danger); font-size: 13px; min-height: 1em; }
+
+/* ---- 顶栏 ---- */
+.topbar {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 14px 20px; background: var(--panel); position: sticky; top: 0; z-index: 5;
+}
+.topbar h1 { font-size: 18px; }
+.status { display: flex; align-items: center; gap: 12px; font-size: 13px; color: var(--muted); }
+.badge { background: var(--warn); color: #201600; padding: 2px 8px; border-radius: 20px; font-size: 12px; }
+.offline-switch { display: flex; align-items: center; gap: 6px; cursor: pointer; user-select: none; }
+.key-warning {
+  background: #3a2a12; color: var(--warn); padding: 8px 20px; font-size: 13px;
+}
+
+/* ---- 看板 ---- */
+.board {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;
+  padding: 20px; align-items: start;
+}
+.column { background: var(--panel); border-radius: 12px; padding: 12px; min-height: 300px; }
+.column header { display: flex; align-items: center; gap: 8px; margin-bottom: 10px; }
+.column h2 { font-size: 15px; }
+.count { background: var(--panel-2); color: var(--muted); border-radius: 20px; padding: 1px 9px; font-size: 12px; }
+.cards { display: flex; flex-direction: column; gap: 8px; min-height: 60px; }
+
+.card {
+  background: var(--panel-2); border-radius: 9px; padding: 10px 12px;
+  cursor: grab; user-select: none; touch-action: none;
+  border: 1px solid transparent;
+}
+.card:hover { border-color: #3a4a6b; }
+.card-top { display: flex; justify-content: space-between; gap: 8px; align-items: flex-start; }
+.card .title { font-size: 14px; word-break: break-word; flex: 1; }
+.card .del {
+  background: none; border: 0; color: var(--muted); font-size: 16px; cursor: pointer;
+  line-height: 1; padding: 2px 4px; border-radius: 4px;
+}
+.card .del:hover { color: var(--danger); background: rgba(255,95,107,.12); }
+.due { display: block; margin-top: 8px; font-size: 12px; color: var(--muted); }
+.due.overdue { color: var(--danger); }
+.due input {
+  background: transparent; border: 0; color: inherit; font-size: 12px;
+  color-scheme: dark; cursor: pointer;
+}
+.edit-title {
+  width: 100%; background: var(--panel); color: var(--text); border: 1px solid var(--accent);
+  border-radius: 6px; padding: 4px 6px; font-size: 14px;
+}
+
+.card.dragging {
+  position: fixed; z-index: 100; pointer-events: none; opacity: .92;
+  box-shadow: 0 14px 34px rgba(0,0,0,.5); cursor: grabbing; margin: 0;
+}
+.placeholder {
+  border: 2px dashed var(--accent); border-radius: 9px; opacity: .5;
+}
+
+.add-form input {
+  width: 100%; margin-top: 10px; padding: 9px 10px; border-radius: 8px;
+  border: 1px dashed #3a465e; background: transparent; color: var(--text); font-size: 13px;
+}
+.add-form input:focus { outline: none; border-color: var(--accent); }
+
+.footer { padding: 12px 20px; color: var(--muted); font-size: 12px; text-align: center; }
+
+@media (max-width: 760px) {
+  .board { grid-template-columns: 1fr; }
+}
