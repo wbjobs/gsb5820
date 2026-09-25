@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>加密协同看板</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div id="unlock-overlay">
+    <form id="unlock-form" class="panel">
+      <h1 id="unlock-title">解锁看板</h1>
+      <input id="unlock-password" type="password" placeholder="主密码" autocomplete="current-password" required>
+      <input id="unlock-confirm" type="password" placeholder="确认主密码" autocomplete="new-password">
+      <button id="unlock-submit" type="submit">解锁</button>
+      <p id="unlock-error" class="error"></p>
+      <p class="hint">所有任务使用主密码派生的 AES-GCM 密钥加密后存储，离线可用。</p>
+    </form>
+  </div>
+
+  <div id="board" style="display:none">
+    <header>
+      <h1>任务看板</h1>
+      <span id="peer-count">在线标签页：1</span>
+    </header>
+    <div id="banner" class="banner" style="display:none"></div>
+    <main id="columns"></main>
+  </div>
+
+  <div id="edit-modal" class="modal" style="display:none">
+    <form id="edit-form" class="panel">
+      <h2>编辑任务</h2>
+      <input type="hidden" id="edit-id">
+      <label>标题<input id="edit-title" required maxlength="200"></label>
+      <label>描述<textarea id="edit-desc" rows="3"></textarea></label>
+      <label>截止时间<input id="edit-due" type="datetime-local"></label>
+      <div class="row">
+        <button type="submit">保存</button>
+        <button type="button" id="edit-cancel">取消</button>
+      </div>
+    </form>
+  </div>
+
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>
